@@ -58,7 +58,7 @@ struct Cliente
         dataNascimento.dia = 0;
         dataNascimento.mes = 0;
         dataNascimento.ano = 0;
-        strcpy(nome,"");
+        strcpy(sexo,"");
     }
 
     void novoCliente()
@@ -70,15 +70,17 @@ struct Cliente
         scanf("%d/%d/%d", &dataNascimento.dia,&dataNascimento.mes,&dataNascimento.ano);
         idade = calculaIdade();
         printf("Digite o sexo: M ou F\n");
-        scanf("%s",&sexo);
+        scanf("%s",sexo);
     }
 
     int calculaIdade()
     {
 
         idade = anoAtual() - dataNascimento.ano;
-        if(dataNascimento.mes > mesAtual() && dataNascimento.dia > diaAtual())
+        if(dataNascimento.mes > mesAtual())
         {
+            idade--;
+        }else if(dataNascimento.dia > diaAtual()){
             idade--;
         }
         return idade;
@@ -107,14 +109,16 @@ int main()
             system("cls");
             clientes[nCadastros].novoCliente();
             nCadastros ++;
+            system("pause");
             break;
-
         case 2:
-            system("cls");
+
+            printf("listar\n");
             for(int i=0; i<nCadastros; i++)
             {
                 clientes[i].listaClientes();
             }
+            system("pause");
             break;
         }
     }
